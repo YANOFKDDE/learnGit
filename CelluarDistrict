@@ -1,0 +1,77 @@
+#include "CellularDistrict.h"
+
+
+int **arrpp;
+int iMax = 0;
+int row = 0;
+int col = 0;
+/************************************************************************
+Description  : 初始化蜂窝小区信息
+Prototype    : void InitCellularDistrict(int iMaxSeqValue)
+               Input Param  : iMaxSeqValue 蜂窝小区的最大值编号，注：编号从1开始
+               Output Param : 无
+               Return Value : 成功返回0，失败返回-1
+/************************************************************************/
+int InitCellularDistrict(int iMaxSeqValue)
+{
+    if (iMaxSeqValue <= 0 || iMaxSeqValue > 100000)
+    {
+        return -1;
+    }
+    iMax = iMaxSeqValue;
+    return 0;
+}
+
+/************************************************************************
+Description  : 计算出蜂窝小区指定两点（编号值）之间的最短距离
+Prototype    : int GetShortestPathLength(int iFirstValue, int iSecondValue)
+               Input Param  : iFirstValue 起点编号值， iSecondValue 终点编号值
+               Output Param : 无
+               Return Value : 计算成功返回最短距离，失败返回-1
+/************************************************************************/
+int GetShortestPathLength(int iFirstValue, int iSecondValue)
+{
+    if(iFirstValue > iMax||iSecondValue > iMax)
+        return -1;
+    int n = 1;
+    while (n*n < iMax)
+    {
+        ++n;
+    }
+    if (n%2 == 0)
+    {
+        ++ n;
+    }
+    row = n;
+    col = n;
+    arrpp =new int *[row];    
+    for(int i = 0; i < col; i++)
+    {
+        int *p = new int[col];//为每行分配空间（每行中有col个元素）
+        for (int j = 0; j < col; ++j)
+        {
+            p[j] = 0;
+        }
+        arrpp[i] = p;
+    }    
+    int x = row/2;
+    int _x = row/2;
+    int y = col/2;
+    int _y = col/2;
+    return -1;
+}
+
+/************************************************************************
+Description  : 清空相关信息
+Prototype    : void Clear()
+               Input Param  : 无
+               Output Param : 无
+               Return Value : 无
+/************************************************************************/
+void Clear()
+{
+    //释放二维数组（反过来） 
+    for(int i = 0;i < row; i++)
+        delete[] arrpp[i]; 
+    delete[] arrpp;
+}
